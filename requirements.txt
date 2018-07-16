@@ -1,0 +1,5 @@
+tqdm==4.23.4
+requests==2.13.0
+pytube==9.2.2
+splinter==0.8.0
+telepot==12.7
