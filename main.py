@@ -33,16 +33,16 @@ def send_tlg_msg(msg):
 
 ## PART OF KAZTUBE UPLOAD
 def browser_setup():
-    display = Display(visible=0, size=(800, 600))
-    display.start()
-    if sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
-        path = "./driver/chromedriverL"
-    elif sys.platform.startswith('darwin'):
-        path = "./driver/chromedriver"
-    else:
-        raise EnvironmentError('Unsupported platform')
-    executable_path = {'executable_path': path}
-    browser = Browser('firefox', headless=True)
+    # display = Display(visible=0, size=(800, 600))
+    # display.start()
+    # if sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
+    #     path = "./driver/chromedriverL"
+    # elif sys.platform.startswith('darwin'):
+    #     path = "./driver/chromedriver"
+    # else:
+    #     raise EnvironmentError('Unsupported platform')
+    # executable_path = {'executable_path': path}
+    browser = Browser('chrome', headless=True)
     browser.visit('https://add2.kaztube.kz/')
     cook = {'_zero_ss': '5b446d9cef619.1531211164.1531211180.2',
             'session': '426f8daf46286ce84b7e4ba79e90af2b7b6ace37%7E5b446adcd7db04-45842121',
@@ -120,7 +120,7 @@ def get_video_list(ID='UC8M5YVWQan_3Elm-URehz9w'):
     req = "https://www.googleapis.com/youtube/v3/search?" \
           "key=AIzaSyCLzxcZG4DaOvgJ8AKRMqvMNbVJAx1Mce8" \
           "&channelId=" + ID + \
-          "&part=snippet,id&order=date&maxResults=10"
+          "&part=snippet,id&order=date&maxResults=40"
     r = requests.get(req)
 
     videos = []
@@ -204,14 +204,14 @@ def main():
             take_screenshot(browser, str(video["id"]))
             os.remove("." + vid)
             len4ik = len4ik + 1
-            if aud:
-                kaztube_upload(browser, video["description"], tags, video["name"], aud)
-                save_log(video["name"], video["description"], tags, video["id"])
-                take_screenshot(browser, str(video["id"]))
-                os.remove("." + aud)
-                audio4ik = audio4ik + 1
-        except:
-            pass
+            # if aud:
+            #     kaztube_upload(browser, video["description"], tags, video["name"], aud)
+            #     save_log(video["name"], video["description"], tags, video["id"])
+            #     take_screenshot(browser, str(video["id"]))
+            #     os.remove("." + aud)
+            #     audio4ik = audio4ik + 1
+        except Exception as e:
+            print(e)
     send_tlg_msg(str(len4ik) + " videos uploaded, check log file")
     send_tlg_msg(str(audio4ik) + " audios uploaded, check log file")
     date = datetime.datetime.now().strftime("%Y-%m-%d")
