@@ -42,7 +42,7 @@ def browser_setup():
     # else:
     #     raise EnvironmentError('Unsupported platform')
     # executable_path = {'executable_path': path}
-    browser = Browser('chrome', headless=True)
+    browser = Browser('chrome') #, headless=True)
     browser.visit('https://add2.kaztube.kz/')
     cook = {'_zero_ss': '5b446d9cef619.1531211164.1531211180.2',
             'session': '426f8daf46286ce84b7e4ba79e90af2b7b6ace37%7E5b446adcd7db04-45842121',
